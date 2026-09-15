@@ -56,6 +56,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -105,20 +117,37 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: .center,
           children: [
             Text(
-                'Lillian has pushed the button this many times:',
-                style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            Text(
-              '$_counter',
+              'Lillian has pushed the button this many times:',
               style: Theme.of(context).textTheme.headlineLarge,
             ),
+            Text('$_counter', style: Theme.of(context).textTheme.headlineLarge),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: 'decrement',
+            onPressed: _decrementCounter,
+            tooltip: 'Decrement',
+            child: const Icon(Icons.remove),
+          ),
+          const SizedBox(width: 12),
+          FloatingActionButton(
+            heroTag: 'reset',
+            onPressed: _resetCounter,
+            tooltip: 'Reset to zero',
+            child: const Text('0'),
+          ),
+          const SizedBox(width: 12),
+          FloatingActionButton(
+            heroTag: 'increment',
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
